@@ -1,5 +1,7 @@
 package library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ public class Library {
     private int id;
     private String name;
     private String logo; //url
+
+    @JsonIgnore
     private List<Book> books = new ArrayList<>();
 
     public Library(int id, String name, String logo) {
