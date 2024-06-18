@@ -5,10 +5,14 @@ import library.model.Book;
 import library.repository.LibraryDao;
 import library.repository.BookDao;
 import library.service.LibraryService;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.logging.Logger;
 
+@Component
+@Scope("prototype")
 public class LibraryServiceBean implements LibraryService {
 
     private static final Logger log = Logger.getLogger(LibraryService.class.getName());

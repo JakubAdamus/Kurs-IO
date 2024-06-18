@@ -2,9 +2,11 @@ package library.repository.mem;
 
 import library.repository.WriterDao;
 import library.model.Writer;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class MemWriterDao implements WriterDao {
     @Override
     public List<Writer> findAll() {

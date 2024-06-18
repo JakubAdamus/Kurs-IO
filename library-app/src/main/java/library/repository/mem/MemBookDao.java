@@ -4,10 +4,12 @@ import library.repository.BookDao;
 import library.model.Library;
 import library.model.Writer;
 import library.model.Book;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class MemBookDao implements BookDao {
     @Override
     public List<Book> findAll() {

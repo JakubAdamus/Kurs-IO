@@ -7,10 +7,13 @@ import library.model.Library;
 import library.model.Writer;
 import library.model.Book;
 import library.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.logging.Logger;
 
+@Component
 public class BookServiceBean implements BookService {
 
     private static final Logger log = Logger.getLogger(BookService.class.getName());
@@ -82,4 +85,8 @@ public class BookServiceBean implements BookService {
         return writerDao.add(d);
     }
 
+    @Autowired
+    public void setWriterDao(WriterDao writerDao) {
+        this.writerDao = writerDao;
+    }
 }

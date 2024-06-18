@@ -3,11 +3,15 @@ package library.repository.mem;
 import library.repository.LibraryDao;
 import library.model.Library;
 import library.model.Book;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Component("libraryDao")
+//@Component
+//@Primary
 public class MemLibraryDao implements LibraryDao {
 
     @Override
