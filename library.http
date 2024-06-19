@@ -7,15 +7,15 @@ custom-header: custom-value
 Cookie: custom-cookie=123
 
 ### get library by id
-GET http://localhost:8080/webapi/libraries/2
+GET http://localhost:8080/webapi/library/2
 Accept: application/xml
 
 ### get libraries by book id
-GET http://localhost:8080/webapi/books/2/libraries
+GET http://localhost:8080/webapi/book/2/libraries
 Accept: application/json
 
 ### add library
-POST http://localhost:8080/webapi/libraries
+POST http://localhost:8080/webapi/library
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 }
 
 ### add library without name
-POST http://localhost:8080/webapi/libraries
+POST http://localhost:8080/webapi/library
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### add library with invalid name size
-POST http://localhost:8080/webapi/libraries
+POST http://localhost:8080/webapi/library
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ### add library with invalid name size accept (accept-language: it)
-POST http://localhost:8080/webapi/libraries
+POST http://localhost:8080/webapi/library
 Content-Type: application/json
 Accept-Language: it-IT
 
@@ -49,3 +49,34 @@ Accept-Language: it-IT
     "name": "",
     "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
 }
+
+### add library with duplicate name
+POST http://localhost:8080/webapi/library
+Content-Type: application/json
+
+{
+    "name": "Biblioteka Narodowa",
+    "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}
+
+### get all books
+GET http://localhost:8080/webapi/books
+
+### get book by id
+GET http://localhost:8080/webapi/book/2
+
+
+### get books by library id
+GET http://localhost:8080/webapi/library/2/books
+
+### add new book
+POST http://localhost:8080/webapi/book
+Content-Type: application/json
+
+{
+    "title": "Custom Book 5",
+    "cover": "https://upload.wikimedia.org/wikipedia/commons/0/0d/The_St_Cuthbert_Gospel_of_St_John._%28formerly_known_as_the_Stonyhurst_Gospel%29_is_the_oldest_intact_European_book._-_Upper_cover_%28Add_Ms_89000%29_%28cropped%29.jpg",
+    "writerId": 1,
+    "rating": 3
+}
+

@@ -1,5 +1,7 @@
 package library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,10 @@ public class Writer {
     private int id;
     private String firstName;
     private String lastName;
+
+    @JsonIgnore
     private List<Book> books = new ArrayList<>();
+
     public Writer(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;

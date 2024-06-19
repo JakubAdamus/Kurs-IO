@@ -5,6 +5,7 @@ import library.model.Book;
 import library.repository.LibraryDao;
 import library.repository.BookDao;
 import library.service.LibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class LibraryServiceBean implements LibraryService {
     private LibraryDao libraryDao;
     private BookDao bookDao;
 
+    @Autowired
     public LibraryServiceBean(LibraryDao libraryDao, BookDao bookDao) {
         log.info("creating library service bean");
         this.libraryDao = libraryDao;

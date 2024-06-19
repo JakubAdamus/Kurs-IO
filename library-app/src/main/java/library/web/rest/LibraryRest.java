@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -30,6 +31,10 @@ public class LibraryRest {
     private final BookService bookService;
     private final MessageSource messageSource;
     private final LocaleResolver localeResolver;
+//    private final LibraryValidator libraryValidator;
+//
+//    @InitBinder
+//    void initBinder(WebDataBinder binder) {binder.addValidators(libraryValidator); }
 
     @GetMapping("/libraries")
     List<Library> getLibraries(@RequestParam(value = "phrase", required = false) String phrase,
@@ -47,7 +52,7 @@ public class LibraryRest {
         return libraries;
     }
 
-    @GetMapping("/libraries/{id}")
+    @GetMapping("/library/{id}")
     ResponseEntity<Library> getLibrary(@PathVariable("id") int id) {
 
         log.info("about to retrieve library {}", id);
@@ -60,7 +65,7 @@ public class LibraryRest {
                 : ResponseEntity.status(404).build();
     }
 
-    @GetMapping("/books/{id}/libraries")
+    @GetMapping("/book/{id}/libraries")
     ResponseEntity<List<Library>> getLibrariesByBook(@PathVariable("id") int id) {
 
         log.info("about to retrieve libraries for book {}", id);
@@ -74,7 +79,7 @@ public class LibraryRest {
         }
     }
 
-    @PostMapping("/libraries")
+    @PostMapping("/library")
     ResponseEntity<?> addLibrary(@Validated @RequestBody Library library, Errors errors, HttpServletRequest request) {
 
         log.info("about to add library {}", library);

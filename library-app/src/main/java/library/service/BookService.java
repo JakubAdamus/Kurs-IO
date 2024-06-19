@@ -1,5 +1,6 @@
 package library.service;
 
+import library.model.Library;
 import library.model.Writer;
 import library.model.Book;
 
@@ -10,7 +11,9 @@ public interface BookService {
 
     List<Book> getAllBooks();
 
-    List<Book> getBooksByWriter(Writer d);
+    List<Book> getBooksByWriter(Writer w);
+
+    List<Book> getBooksInLibrary(Library l);
 
     Book getBookById(int id);
 

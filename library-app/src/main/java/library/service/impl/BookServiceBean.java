@@ -19,55 +19,45 @@ public class BookServiceBean implements BookService {
     private static final Logger log = Logger.getLogger(BookService.class.getName());
 
     private WriterDao writerDao;
-    private LibraryDao libraryDao;
     private BookDao bookDao;
 
-    public BookServiceBean(WriterDao writerDao, LibraryDao libraryDao, BookDao bookDao) {
+    @Autowired
+    public BookServiceBean(WriterDao writerDao, BookDao bookDao) {
         this.writerDao = writerDao;
-        this.libraryDao = libraryDao;
         this.bookDao = bookDao;
     }
 
+    @Override
     public List<Book> getAllBooks() {
         log.info("searching all books...");
         return bookDao.findAll();
     }
 
+    @Override
     public List<Book> getBooksByWriter(Writer d) {
         log.info("serching books by writer " + d.getId());
         return bookDao.findByWriter(d);
     }
 
+    @Override
     public List<Book> getBooksInLibrary(Library c) {
         log.info("searching books in library " + c.getId());
         return bookDao.findByLibrary(c);
     }
 
+    @Override
     public Book getBookById(int id) {
         log.info("searching book by id " + id);
         return bookDao.findById(id);
     }
 
-    public List<Library> getAllLibraries() {
-        log.info("searching all libraries");
-        return libraryDao.findAll();
-    }
-
-    public List<Library> getLibrariesByBook(Book m) {
-        log.info("searching libraries by book " + m.getId());
-        return libraryDao.findByBook(m);
-    }
-
-    public Library getLibraryById(int id) {
-        log.info("searching library by id " + id);
-        return libraryDao.findById(id);
-    }
-
+    @Override
     public List<Writer> getAllWriters() {
         log.info("searching all writers");
         return writerDao.findAll();
     }
 
+    @Override
     public Writer getWriterById(int id) {
         log.info("searching writer by id " + id);
         return writerDao.findById(id);
