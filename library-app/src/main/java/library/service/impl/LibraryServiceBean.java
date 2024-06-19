@@ -50,4 +50,9 @@ public class LibraryServiceBean implements LibraryService {
         return libraryDao.findByBook(m);
     }
 
+    @Override
+    public Library addLibrary(Library library) {
+        log.info("adding new library " + library);
+        return libraryDao.save(library);
+    }
 }

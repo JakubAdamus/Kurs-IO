@@ -1,0 +1,24 @@
+### get all libraries
+GET http://localhost:8080/webapi/libraries
+
+### get libraries with phrase
+GET http://localhost:8080/webapi/libraries?phrase=Library123
+custom-header: custom-value
+Cookie: custom-cookie=123
+
+### get library by id
+GET http://localhost:8080/webapi/libraries/2
+Accept: application/xml
+
+### get libraries by book id
+GET http://localhost:8080/webapi/books/2/libraries
+Accept: application/json
+
+### add library
+POST http://localhost:8080/webapi/libraries
+Content-Type: application/json
+
+{
+    "name": "Custom Library 5",
+    "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}

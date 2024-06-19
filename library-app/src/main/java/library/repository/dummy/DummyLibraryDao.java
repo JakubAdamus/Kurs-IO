@@ -24,4 +24,7 @@ public class DummyLibraryDao implements LibraryDao {
     public List<Library> findByBook(Book m) {
         return null;
     }
+
+    @Override
+    public Library save(Library library) {return null; }
 }

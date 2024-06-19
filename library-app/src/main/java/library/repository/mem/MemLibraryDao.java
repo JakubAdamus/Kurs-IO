@@ -28,4 +28,15 @@ public class MemLibraryDao implements LibraryDao {
     public List<Library> findByBook(Book m) {
         return SampleData.libraries.stream().filter(c -> c.getBooks().contains(m)).collect(Collectors.toList());
     }
+
+    @Override
+    public Library save(Library library) {
+        int maxId = SampleData.libraries.stream()
+                .min((c1, c2) -> c2.getId() - c1.getId())
+                .map(Library::getId)
+                .orElse(0);
+        library.setId(maxId+1);
+        SampleData.libraries.add(library);
+        return library;
+    }
 }
