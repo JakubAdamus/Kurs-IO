@@ -1,16 +1,24 @@
 package library.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import library.model.Book;
 import library.model.Library;
 import library.service.BookService;
 import library.service.LibraryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +28,8 @@ public class LibraryRest {
 
     private final LibraryService libraryService;
     private final BookService bookService;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     @GetMapping("/libraries")
     List<Library> getLibraries(@RequestParam(value = "phrase", required = false) String phrase,
@@ -59,15 +69,27 @@ public class LibraryRest {
         if (book == null) return ResponseEntity.notFound().build();
         else {
             List<Library> libraries = libraryService.getLibrariesByBook(book);
-            log.info("there's () libraries having book {}", libraries.size(), book.getTitle());
+            log.info("there's {} libraries having book {}", libraries.size(), book.getTitle());
             return ResponseEntity.ok(libraries);
         }
     }
 
     @PostMapping("/libraries")
-    ResponseEntity<Library> addLibrary(@RequestBody Library library) {
+    ResponseEntity<?> addLibrary(@Validated @RequestBody Library library, Errors errors, HttpServletRequest request) {
 
         log.info("about to add library {}", library);
+
+        if (errors.hasErrors()) {
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMessage = errors.getAllErrors().stream()
+                    .map(oe -> messageSource.getMessage(Objects.requireNonNull(oe.getCode()), new Object[0], locale))
+                    .reduce("Error msg:\n", (s1, s2) -> s1 + s2 + "\n");
+
+            log.error("library has errors: {}", errorMessage);
+
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
         Library savedLibrary = libraryService.addLibrary(library);
         log.info("library saved {}", savedLibrary);
 

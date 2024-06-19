@@ -22,3 +22,30 @@ Content-Type: application/json
     "name": "Custom Library 5",
     "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
 }
+
+### add library without name
+POST http://localhost:8080/webapi/libraries
+Content-Type: application/json
+
+{
+    "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}
+
+### add library with invalid name size
+POST http://localhost:8080/webapi/libraries
+Content-Type: application/json
+
+{
+    "name": "C",
+    "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}
+
+### add library with invalid name size accept (accept-language: it)
+POST http://localhost:8080/webapi/libraries
+Content-Type: application/json
+Accept-Language: it-IT
+
+{
+    "name": "",
+    "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}

@@ -1,6 +1,8 @@
 package library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,11 @@ import java.util.List;
 public class Library {
 
     private int id;
+
+    @NotNull
+    @Size(min = 2, max = 20)
     private String name;
+
     private String logo; //url
 
     @JsonIgnore
