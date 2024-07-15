@@ -11,9 +11,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 
@@ -45,6 +43,9 @@ public class LibraryRest {
         log.info("phrase parameter: {}", phrase);
         log.info("custom header: {}", customHeader);
         log.info("custom cookie: {}", customCookie);
+
+        if(phrase != null && phrase.equals("foo"))
+            throw new IllegalArgumentException("Foo!");
 
         List<Library> libraries = libraryService.getAllLibraries();
         log.info("{} libraries found", libraries.size());

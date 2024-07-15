@@ -14,9 +14,7 @@ public class LibraryValidator implements Validator {
     private final LibraryService libraryService;
 
     @Override
-    public boolean supports(Class<?> clazz) {
-        return Library.class.isAssignableFrom(clazz);
-    }
+    public boolean supports(Class<?> clazz) { return clazz.isAssignableFrom(clazz); }
 
     @Override
     public void validate(Object target, Errors errors) {

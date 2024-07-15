@@ -2,7 +2,7 @@
 GET http://localhost:8080/webapi/libraries
 
 ### get libraries with phrase
-GET http://localhost:8080/webapi/libraries?phrase=Library123
+GET http://localhost:8080/webapi/libraries?phrase=foo
 custom-header: custom-value
 Cookie: custom-cookie=123
 
@@ -46,7 +46,7 @@ Content-Type: application/json
 Accept-Language: it-IT
 
 {
-    "name": "",
+    "name": "Library 2",
     "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
 }
 
@@ -76,7 +76,7 @@ Content-Type: application/json
 {
     "title": "Custom Book 5",
     "cover": "https://upload.wikimedia.org/wikipedia/commons/0/0d/The_St_Cuthbert_Gospel_of_St_John._%28formerly_known_as_the_Stonyhurst_Gospel%29_is_the_oldest_intact_European_book._-_Upper_cover_%28Add_Ms_89000%29_%28cropped%29.jpg",
-    "writerId": 1,
+    "writerId": 5,
     "rating": 3
 }
 

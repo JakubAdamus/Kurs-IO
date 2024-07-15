@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Writers</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <a href="./"><h1>Writers</h1></a>
+    <h2 th:text="${title}">Our Esteemed Writers</h2>
+</header>
+<section>
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        <tr th:each="writer : ${writers}">
+            <td th:text="${writer.firstName}"></td>
+            <td>
+                <a th:href="@{/books?writerId={id}(id=${writer.id})}"
+                   th:text="${writer.lastName}"></a>
+            </td>
+        </tr>
+    </table>
+</section>
+<div id="orders">
+
+</div>
+<footer>
+    <a href="https://www.flaticon.com/free-icons/study" title="study icons">Study icons created by Freepik - Flaticon</a>
+    <!--${tip}-->
+</footer>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 package library.web.rest;
 
+import jakarta.servlet.http.HttpServletRequest;
 import library.model.Book;
 import library.model.Library;
 import library.service.BookService;
@@ -9,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.WebDataBinder;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -71,9 +73,21 @@ public class BookRest {
     }
 
     @PostMapping("/book")
-    ResponseEntity<?> addBook(@RequestBody BookDto bookDTO) {
+    ResponseEntity<?> addBook(@Validated @RequestBody BookDto bookDTO, Errors errors, HttpServletRequest request) {
 
         log.info("about to add book {}", bookDTO);
+
+        if (errors.hasErrors()) {
+            Locale locale = localeResolver.resolveLocale(request);
+            String errorMessage = errors.getAllErrors().stream()
+                    .map(oe -> messageSource.getMessage(Objects.requireNonNull(oe.getCode()), new Object[0], locale))
+                    .reduce("Error msg:\n", (s1, s2) -> s1 + s2 + "\n");
+
+            log.error("book has errors: {}", errorMessage);
+
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
+
         Book book = new Book();
         book.setTitle(bookDTO.getTitle());
         book.setCover(bookDTO.getCover());
