@@ -1,15 +1,31 @@
 package library.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "Books")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String cover;
+    @ManyToOne
+    @JoinColumn(name = "writer_id")
     private Writer writer;
     private float rating;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Books_Libraries",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "library_id", referencedColumnName = "id")
+    )
+
     private List<Library> libraries = new ArrayList<>();
 
     public Book(int id, String title, String cover, Writer writer, float rating) {

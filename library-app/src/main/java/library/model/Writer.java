@@ -1,16 +1,24 @@
 package library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "Writers")
 public class Writer {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
 
+    @OneToMany(mappedBy = "writer")
     @JsonIgnore
     private List<Book> books = new ArrayList<>();
 

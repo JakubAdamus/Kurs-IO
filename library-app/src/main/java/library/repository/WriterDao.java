@@ -10,7 +10,7 @@ public interface WriterDao {
 
     Writer findById(int id);
 
-    Writer add(Writer d);
+    Writer add(Writer w);
 
 
 }

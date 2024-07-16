@@ -1,3 +1,5 @@
 **/target
 **/*.iml
 **/.idea
+
+docker-library/mysql/data/

@@ -16,6 +16,6 @@ public interface BookDao {
 
     List<Book> findByLibrary(Library c);
 
-    Book add(Book m);
+    Book add(Book b);
 
 }
