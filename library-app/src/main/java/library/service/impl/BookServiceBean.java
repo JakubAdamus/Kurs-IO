@@ -7,25 +7,29 @@ import library.model.Library;
 import library.model.Writer;
 import library.model.Book;
 import library.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class BookServiceBean implements BookService {
 
     private static final Logger log = Logger.getLogger(BookService.class.getName());
 
-    private WriterDao writerDao;
-    private BookDao bookDao;
-
-    @Autowired
-    public BookServiceBean(WriterDao writerDao, BookDao bookDao) {
-        this.writerDao = writerDao;
-        this.bookDao = bookDao;
-    }
+    private final WriterDao writerDao;
+    private final BookDao bookDao;
+    private final PlatformTransactionManager transactionManager;
 
     @Override
     public List<Book> getAllBooks() {
@@ -63,20 +67,41 @@ public class BookServiceBean implements BookService {
         return writerDao.findById(id);
     }
 
+//    @Override
+//    public Book addBook(Book m) {
+//        log.info("about to add book " + m);
+//
+//        TransactionStatus ts = transactionManager.getTransaction(new DefaultTransactionDefinition());
+//        try {
+//            m = bookDao.add(m);
+//            if(m.getTitle().equals("Custom Book 5")) {
+//                throw new RuntimeException("not yet!");
+//            }
+//            transactionManager.commit(ts);
+//        } catch (RuntimeException e) {
+//            transactionManager.rollback(ts);
+//            throw e;
+//        }
+//
+//        return m;
+//    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Book addBook(Book m) {
         log.info("about to add book " + m);
-        return bookDao.add(m);
+
+        m = bookDao.add(m);
+        if(m.getTitle().equals("Custom Book 5")) {
+            throw new RuntimeException("not yet!");
+        }
+
+        return m;
     }
 
     @Override
     public Writer addWriter(Writer d) {
         log.info("about to add writer " + d);
         return writerDao.add(d);
-    }
-
-    @Autowired
-    public void setWriterDao(WriterDao writerDao) {
-        this.writerDao = writerDao;
     }
 }

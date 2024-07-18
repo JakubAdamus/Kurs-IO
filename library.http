@@ -76,7 +76,7 @@ Content-Type: application/json
 {
     "title": "Custom Book 5",
     "cover": "https://upload.wikimedia.org/wikipedia/commons/0/0d/The_St_Cuthbert_Gospel_of_St_John._%28formerly_known_as_the_Stonyhurst_Gospel%29_is_the_oldest_intact_European_book._-_Upper_cover_%28Add_Ms_89000%29_%28cropped%29.jpg",
-    "writerId": 5,
+    "writerId": 4,
     "rating": 3
 }
 

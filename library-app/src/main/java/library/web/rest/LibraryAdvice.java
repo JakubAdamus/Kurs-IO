@@ -32,4 +32,10 @@ public class LibraryAdvice {
         log.error("illegal argument provided", e);
         return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body(e.getMessage());
     }
+
+    @ExceptionHandler(Exception.class)
+    ResponseEntity<String> handleException(Exception e) {
+        log.error("exception occurred", e);
+        return ResponseEntity.status(HttpStatus.LOOP_DETECTED).body(e.getMessage());
+    }
 }
