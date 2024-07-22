@@ -1,5 +1,6 @@
 ### get all libraries
 GET http://localhost:8080/webapi/libraries
+Authorization: Basic user user
 
 ### get libraries with phrase
 GET http://localhost:8080/webapi/libraries?phrase=foo
@@ -17,9 +18,10 @@ Accept: application/json
 ### add library
 POST http://localhost:8080/webapi/library
 Content-Type: application/json
+Authorization: Basic dbuser1 123
 
 {
-    "name": "Custom Library 5",
+    "name": "Custom Library 18",
     "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
 }
 

@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -95,9 +97,12 @@ public class LibraryRest {
 
             return ResponseEntity.badRequest().body(errorMessage);
         }
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info("authentication: {}",authentication);
+        log.info("authentication name: {}",authentication.getName());
         Library savedLibrary = libraryService.addLibrary(library);
         log.info("library saved {}", savedLibrary);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedLibrary);
     }

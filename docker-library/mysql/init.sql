@@ -81,15 +81,15 @@ CREATE TABLE `Roles`
 );
 
 INSERT INTO `Users`(`username`, `password`)
-VALUES ('dbuser1', '$2a$10$eiA5dKnoUk77EKXZhJvq7O3XBy5ECYupA0FCEm0gS58QSY6PoPcOS'),
-       ('dbuser2', '$2a$10$eiA5dKnoUk77EKXZhJvq7O3XBy5ECYupA0FCEm0gS58QSY6PoPcOS'),
-       ('dbuser3', '$2a$10$eiA5dKnoUk77EKXZhJvq7O3XBy5ECYupA0FCEm0gS58QSY6PoPcOS');
+VALUES ('dbuser1', '123'),
+       ('dbuser2', '123'),
+       ('dbuser3', '123');
 
 
 INSERT INTO `Roles`(`username`, `role`)
-VALUES ('dbuser1', 'USER_ADMIN'),
-       ('dbuser2', 'AUTHOR_ADMIN'),
-       ('dbuser3', 'BOOK_ADMIN');
+VALUES ('dbuser1', 'ROLE_ADMIN'),
+       ('dbuser2', 'ROLE_AUTHOR_ADMIN'),
+       ('dbuser3', 'ROLE_BOOK_ADMIN');
 
 
 
