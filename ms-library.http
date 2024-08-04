@@ -1,0 +1,21 @@
+### get all libraries
+GET http://localhost:8070/webapi/libraries
+Authorization: Basic dbuser1 123
+
+### get library by id
+GET http://localhost:8070/webapi/library/2
+Accept: application/xml
+
+### get libraries by book id
+GET http://localhost:8070/webapi/book/2/libraries
+Accept: application/json
+
+### add library
+POST http://localhost:8070/webapi/library
+Content-Type: application/json
+Authorization: Basic dbuser1 123
+
+{
+  "name": "Custom Library 18",
+  "logo": "https://commons.wikimedia.org/wiki/Category:The_Wikipedia_Library_logos#/media/File:Book_designed_by_Benny_Forsberg_from_the_Noun_Project_-_with_lines.png"
+}
