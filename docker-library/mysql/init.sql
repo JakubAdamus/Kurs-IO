@@ -52,7 +52,7 @@ VALUES (1, 'A Game of Thrones', 'https://upload.wikimedia.org/wikipedia/en/9/93/
        (7, 'Harry Potter and the Philosopher''s Stone', 'https://upload.wikimedia.org/wikipedia/en/6/6b/Harry_Potter_and_the_Philosopher%27s_Stone_Book_Cover.jpg', 4, 4.2),
        (8, 'Harry Potter and the Prisoner of Azkaban', 'https://ecsmedia.pl/c/noc-listopadowa-b-iext64788740.jpg', 4, 4.5);
 
-INSERT INTO book_library (`book_id`, `library_id`)
+INSERT INTO Books_Libraries (`book_id`, `library_id`)
 VALUES (1, 1),
        (2, 1),
        (3, 4),
